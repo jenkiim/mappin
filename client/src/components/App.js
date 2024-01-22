@@ -75,7 +75,7 @@ const App = () => {
 
   return (
     <div>
-      <NavBar/>
+      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <div ref={mapContainer} className="map-container" />
     </div>
   );

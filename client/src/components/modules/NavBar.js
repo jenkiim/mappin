@@ -1,12 +1,12 @@
 import React from "react";
 //import { Link } from "@reach/router";
-//import GoogleLogin, { GoogleLogout } from "react-google-login";
+import GoogleLogin, { GoogleLogout } from "react-google-login";
 
 import "./NavBar.css";
 import logo from "./logo.png";
 
 // This identifies your web application to Google's authentication service
-const GOOGLE_CLIENT_ID = "395785444978-7b9v7l0ap2h3308528vu1ddnt3rqftjc.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID = "48367706903-o5qcuf14etkc6bfl7ms4abq4vssg2234.apps.googleusercontent.com";
 
 /**
  * The navigation bar at the top of all pages. Takes no props.
@@ -18,20 +18,8 @@ const NavBar = (props) => {
         <img src={logo} className="NavBar-smallPic"/>
       </div>
       <div className="NavBar-linkContainer u-inlineBlock">
-        {/* <Link to="/" className="NavBar-link">
-          Home
-        </Link>
-        {props.userId && (
-          <Link to={`/profile/${props.userId}`} className="NavBar-link">
-            Profile
-          </Link>
-        )}
-        <Link to="/chat/" className="NavBar-link">
-          Chat
-        </Link>
-        <Link to="/game/" className="NavBar-link">
-          Game
-        </Link>
+        
+        
         {props.userId ? (
           <GoogleLogout
             clientId={GOOGLE_CLIENT_ID}
@@ -48,7 +36,7 @@ const NavBar = (props) => {
             onFailure={(err) => console.log(err)}
             className="NavBar-link NavBar-login"
           />
-        )} */}
+        )}
       </div>
     </nav>
   );
