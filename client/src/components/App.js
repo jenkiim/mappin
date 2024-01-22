@@ -5,7 +5,8 @@ import jwt_decode from "jwt-decode";
 
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
-import Map from "./pages/Map.js";
+import NavBar from "./modules/NavBar.js";
+//import Map from "./pages/Map.js";
 
 import "../utilities.css";
 
@@ -40,6 +41,8 @@ const App = () => {
     });
   });
 
+  
+
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
@@ -72,6 +75,7 @@ const App = () => {
 
   return (
     <div>
+      <NavBar/>
       <div ref={mapContainer} className="map-container" />
     </div>
   );
