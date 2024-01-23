@@ -4,6 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "./components/App.js";
 
+//import React from 'react';
+import ReactDOM from 'react-dom';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import './utilities.css';
+//import App from './App';
+
 // renders React Component "Root" into the DOM element with ID "root"
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -15,3 +21,12 @@ root.render(
 
 // allows for live updating
 module.hot.accept();
+
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
