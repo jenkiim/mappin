@@ -96,6 +96,7 @@ form {
 .map-container {
   margin-top: 0px;
   height: 750px;
+  position: absolute;
 }
 
 .sidebar {
@@ -110,4 +111,3 @@ form {
   margin: 12px;
   border-radius: 4px;
 }
-

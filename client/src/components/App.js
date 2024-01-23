@@ -13,31 +13,11 @@ import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
 
-// import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-
-// mapboxgl.accessToken = 'pk.eyJ1IjoidHlqaWFuZyIsImEiOiJjbHJwYXRnbnowM3J3MmxvZGkxMnVtOXcyIn0.0SV7DXnN3Kpg9iZ2MwYxkg';
-
 /**
  * Define the "App" component
  */
 const App = () => {
   const [userId, setUserId] = useState(undefined);
-
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
-  const [zoom, setZoom] = useState(9);
-
-  useEffect(() => {
-    if (map.current) return; // initialize map only once
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [lng, lat],
-      zoom: zoom,
-    });
-  });
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
