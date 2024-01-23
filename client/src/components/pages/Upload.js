@@ -1,9 +1,11 @@
 import React from "react";
+import TextInput from '../modules/TextInput';
+import "./Upload.css";
 
 const Upload = () => {
   return (
     <div>
-      <h1>Upload page Yay!</h1>
+      <TextInput />
     </div>
   );
 };

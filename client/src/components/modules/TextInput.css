@@ -1,0 +1,11 @@
+.TextInput-infoBox {
+    margin-left: 6%;
+}
+
+.TextInput-bigBox {
+    height: 100px;
+    width: 40%;
+}
+.TextInput-blueBox {
+    border: 1px solid lightblue;
+}
