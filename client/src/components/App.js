@@ -13,10 +13,9 @@ import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
 
-//import React, { , useEffect, useState } from 'react';
-import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+// import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 
-mapboxgl.accessToken = 'pk.eyJ1IjoidHlqaWFuZyIsImEiOiJjbHJwYXRnbnowM3J3MmxvZGkxMnVtOXcyIn0.0SV7DXnN3Kpg9iZ2MwYxkg';
+// mapboxgl.accessToken = 'pk.eyJ1IjoidHlqaWFuZyIsImEiOiJjbHJwYXRnbnowM3J3MmxvZGkxMnVtOXcyIn0.0SV7DXnN3Kpg9iZ2MwYxkg';
 
 /**
  * Define the "App" component
@@ -34,13 +33,11 @@ const App = () => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v12',
+      style: "mapbox://styles/mapbox/streets-v12",
       center: [lng, lat],
-      zoom: zoom
+      zoom: zoom,
     });
   });
-
-  
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -60,12 +57,6 @@ const App = () => {
       post("/api/initsocket", { socketid: socket.id });
     });
   };
-
-
-
-
-
-
 
   const handleLogout = () => {
     setUserId(undefined);
