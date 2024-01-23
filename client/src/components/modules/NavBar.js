@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 //import { Link } from "@reach/router";
-import GoogleLogin, { GoogleLogout } from "react-google-login";
+import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 import { NewEntry } from "./NewEntryInput.js";
 
 import "./NavBar.css";
@@ -12,7 +12,7 @@ const GOOGLE_CLIENT_ID = "48367706903-o5qcuf14etkc6bfl7ms4abq4vssg2234.apps.goog
 /**
  * The navigation bar at the top of all pages. Takes no props.
  */
-const NavBar = (props) => {
+const NavBar = ({ props, userId, handleLogin, handleLogout }) => {
   const [entries, setEntries] = useState([]);
 
   const addNewEntry = (entryObj) => {
@@ -26,23 +26,20 @@ const NavBar = (props) => {
         <img src={logo} className="NavBar-smallPic" />
       </div>
       <div className="NavBar-linkContainer u-inlineBlock">
-        {props.userId ? (
-          <GoogleLogout
-            clientId={GOOGLE_CLIENT_ID}
-            buttonText="Logout"
-            onLogoutSuccess={props.handleLogout}
-            onFailure={(err) => console.log(err)}
-            className="NavBar-link NavBar-login"
-          />
-        ) : (
-          <GoogleLogin
-            clientId={GOOGLE_CLIENT_ID}
-            buttonText="Login"
-            onSuccess={props.handleLogin}
-            onFailure={(err) => console.log(err)}
-            className="NavBar-link NavBar-login"
-          />
-        )}
+        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+          {userId ? (
+            <button
+              onClick={() => {
+                googleLogout();
+                handleLogout();
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
+          )}
+        </GoogleOAuthProvider>
       </div>
     </nav>
   );
