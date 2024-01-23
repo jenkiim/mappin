@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import jwt_decode from "jwt-decode";
 
 import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
+import Map from "./pages/Map.js";
 import NavBar from "./modules/NavBar.js";
-//import Map from "./pages/Map.js";
 
 import "../utilities.css";
 
@@ -76,20 +75,12 @@ const App = () => {
   return (
     <div>
       <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-      <div ref={mapContainer} className="map-container" />
+      <Routes>
+        <Route path="/" element={<Map />} />
+        {/* <Route path="/upload" element={<Map />} /> */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
-  );
-
-  return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <Map/>
-        }
-      />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
   );
 };
 
