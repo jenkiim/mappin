@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 import NotFound from "./pages/NotFound.js";
 import Map from "./pages/Map.js";
 import NavBar from "./modules/NavBar.js";
+import Upload from "./pages/Upload.js";
 
 import "../utilities.css";
 
@@ -48,6 +49,7 @@ const App = () => {
       <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
         <Route path="/" element={<Map />} />
+        <Route path="/upload" element={<Upload />} />
         {/* <Route path="/upload" element={<Map />} /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -24,6 +24,7 @@
   --medgrey: #e0e0e0;
   --grey: #f7f7f7;
   --white: #fff;
+  --trademark: #6fa8dc;
 
   --xs: 4px;
   --s: 8px;
@@ -57,6 +58,10 @@ form {
 
 .u-flex-justifyLeft {
   justify-content: left;
+}
+
+.u-flex-justifyRight {
+  justify-content: right;
 }
 
 .u-flex-alignCenter {

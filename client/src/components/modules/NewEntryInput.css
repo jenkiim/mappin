@@ -1,9 +1,9 @@
 .NewPostInput-input,
 .NewPostInput-button {
-  font-family: "Open Sans";
-  font-size: 14px;
-  padding: var(--s) var(--m);
-  position: absolute;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 70px;
+  height: 50px;
 }
 
 .NewPostInput-input {
@@ -19,8 +19,8 @@
 }
 
 .NewPostInput-button {
-  color: var(--primary);
-  border: var(--primary) 1px solid;
+  color: var(--trademark);
+  border: var(--trademark) 1px solid;
   border-radius: 0 var(--xs) var(--xs) 0;
   background: none;
   transition: color 0.1s, background 0.1s;
@@ -28,5 +28,5 @@
 
 .NewPostInput-button:hover {
   color: var(--white);
-  background-color: var(--primary);
+  background-color: var(--trademark);
 }

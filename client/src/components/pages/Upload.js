@@ -1,12 +1,11 @@
 import React from "react";
 
-const MapPage = () => {
+const Upload = () => {
   return (
     <div>
-      <h1>404 Not Found</h1>
-      <p>The page you requested couldn't be found.</p>
+      <h1>Upload page Yay!</h1>
     </div>
   );
 };
 
-export default MapPage;
+export default Upload;

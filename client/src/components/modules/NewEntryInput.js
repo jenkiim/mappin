@@ -15,35 +15,28 @@ import { post } from "../../utilities.js";
 const NewEntryInput = (props) => {
   const [value, setValue] = useState("");
 
-  // // called whenever the user types in the new post input box
-  // const handleChange = (event) => {
-  //   setValue(event.target.value);
-  // };
+  // Need to use the navigate function
+  const navigate = useNavigate();
 
-  // called when the user hits the Plus Button for a new post
+  // navigates to upload page when the user hits the Plus Button for a new post
   const handleAdd = (event) => {
-    // props.onSubmit && props.onSubmit(value);
-    // useNavigate("/upload");
+    navigate("/upload");
     console.log("clicked to upload");
     setValue("");
   };
 
+  // idk why but the picture won't be the button :( (also gave up and added button to nav bar...)
   return (
     <div className="u-flex-justifyLeft">
-      {/* <input
-        type="text"
-        placeholder={props.defaultText}
-        value={value}
-        onChange={handleChange}
-        className="NewPostInput-input"
-      /> */}
       <button
         type="submit"
         src="plus_button.png"
         className="NewPostInput-button u-pointer"
         value="Submit"
         onClick={handleAdd}
-      />
+      >
+        Upload Pin
+      </button>
     </div>
   );
 };

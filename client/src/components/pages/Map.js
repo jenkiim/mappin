@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NewEntry } from "../modules/NewEntryInput.js";
+// import { NewEntry } from "../modules/NewEntryInput.js";
 
-import "../../utilities.css";
+import "./Map.css";
 
 import mapboxgl from "!mapbox-gl"; // eslint-disable-line import/no-webpack-loader-syntax
 
@@ -9,7 +9,7 @@ mapboxgl.accessToken =
   "pk.eyJ1IjoidHlqaWFuZyIsImEiOiJjbHJwYXRnbnowM3J3MmxvZGkxMnVtOXcyIn0.0SV7DXnN3Kpg9iZ2MwYxkg";
 
 const Map = () => {
-  const [entries, setEntries] = useState([]);
+  // const [entries, setEntries] = useState([]);
 
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -27,13 +27,14 @@ const Map = () => {
     });
   });
 
-  const addNewEntry = (entryObj) => {
-    setEntries([entryObj].concat(entries));
-  };
+  // This is for having button as a component and trying to have on top of map
+  // const addNewEntry = (entryObj) => {
+  //   setEntries([entryObj].concat(entries));
+  // };
   return (
-    <div>
-      {/* <NewEntry addNewEntry={addNewEntry} /> */}
+    <div className="overlap-container">
       <div ref={mapContainer} className="map-container" />
+      {/* <NewEntry addNewEntry={addNewEntry} /> */}
     </div>
   );
 };

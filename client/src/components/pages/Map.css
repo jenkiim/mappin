@@ -1,0 +1,18 @@
+.overlap-container {
+  position: relative;
+}
+
+.map-container {
+  margin-top: 0px;
+  height: 750px;
+  position: absolute;
+}
+
+.map-container,
+.NewEntry {
+  position: absolute;
+  top: 5; /* Adjust top position */
+  left: 0; /* Adjust left position */
+  /* background-color: rgba(255, 0, 0, 0.5); Example background color with transparency */
+  padding: 10px;
+}

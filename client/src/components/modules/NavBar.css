@@ -1,43 +1,55 @@
 .NavBar-container {
-    padding-top: -20px;
-    background-color: white;
-  }
-  
-  .NavBar-title {
-    color: var(--white);
-    font-size: 20px;
-  }
-  
-  .NavBar-linkContainer {
-    margin-left: 570px;
-  }
-  
-  .NavBar-link,
-  .NavBar-link:visited {
-    color: var(--white);
-    opacity: 0.6;
-    text-decoration: none;
-  }
-  
-  .NavBar-link:hover {
-    opacity: 0.8;
-  }
-  
-  .NavBar-link.NavBar-login {
-    opacity: 1;
-  }
-  
-  .NavBar-link + .NavBar-link {
-    margin-left: var(--m);
-  }
+  /* padding-top: -50px; */
+  background-color: white;
+  display: flex;
+  /* margin-bottom: 5px; */
+}
 
-  .NavBar-smallPic{
-    display: block;
-    margin-top: 15px;
-    margin-left: 680px;
-    margin-right: auto;
-    width: 150px;
-  }
+.NavBar-container .col {
+  flex: 1;
+}
 
+.NavBar-title {
+  color: var(--white);
+  font-size: 20px;
+}
 
-  
+.NavBar-linkContainer {
+  margin-left: 490px;
+  margin-top: 10px;
+}
+
+.NavBar-link,
+.NavBar-link:visited {
+  color: var(--white);
+  opacity: 0.6;
+  text-decoration: none;
+}
+
+.NavBar-link:hover {
+  opacity: 0.8;
+}
+
+.NavBar-link.NavBar-login {
+  opacity: 1;
+}
+
+.NavBar-link + .NavBar-link {
+  margin-left: var(--m);
+}
+
+.NavBar-smallPic {
+  display: block;
+  margin-top: 15px;
+  margin-left: 680px;
+  margin-right: auto;
+  width: 150px;
+}
+
+.NewEntry {
+  position: absolute;
+  top: -10; /* Adjust top position */
+  left: 0; /* Adjust left position */
+  /* background-color: rgba(255, 0, 0, 0.5); Example background color with transparency */
+  padding: 10px;
+}
