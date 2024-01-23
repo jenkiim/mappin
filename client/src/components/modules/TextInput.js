@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './TextInput.css';
+import { useNavigate } from "react-router-dom";
 
 const TextInput = () => {
   // States to manage input values
@@ -34,6 +35,20 @@ const TextInput = () => {
         date: date,
     }
     props.onSubmit && props.onSubmit(newEntry);
+    setName("");
+    setDescription("");
+    setLocation("");
+    setDate("");
+  };
+
+
+  // Need to use the navigate function
+  const navigate = useNavigate();
+
+  // navigates to upload page when the user hits the Plus Button for a new post
+  const handleCancel = (event) => {
+    navigate("/");
+    console.log("clicked to cancel upload");
     setName("");
     setDescription("");
     setLocation("");
@@ -102,13 +117,21 @@ const TextInput = () => {
 
     {/*submit button*/}
     <div>
-    <button
-        type="submit"
-        className="NewPostInput-button u-pointer"
-        value="Submit"
-        onClick={handleSubmit}
-      >Submit
-      </button>
+        <button
+            type="submit"
+            className="NewPostInput-button u-pointer"
+            value="Submit"
+            onClick={handleSubmit}
+        >Submit
+        </button>
+        <button
+            type="submit"
+            className="NewPostInput-button u-pointer"
+            value="Submit"
+            onClick={handleCancel}
+        >
+            Cancel
+        </button>
     </div>
 
   </>
@@ -116,3 +139,9 @@ const TextInput = () => {
 };
 
 export default TextInput;
+
+
+
+
+
+
