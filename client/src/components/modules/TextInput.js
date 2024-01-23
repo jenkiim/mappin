@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './TextInput.css';
 
 const TextInput = () => {
-  // State to manage the input value
+  // States to manage input values
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
@@ -23,6 +23,8 @@ const TextInput = () => {
     setDate(event.target.value);
   };
 
+
+  //handle submissions
   const handleSubmit = (event) => {
     event.preventDefault();
     const newEntry = {
@@ -41,86 +43,75 @@ const TextInput = () => {
 
 
   return (<>
-  <h1 className="Upload-infoTitle">Name:</h1>
-  <div className="TextInput-infoBox">
-      {/* Input element with value and onChange event */}
+
+    {/* TITLE AND TEXT BOX FOR NAME INPUT*/}
+    <h1 className="Upload-infoTitle">Name:</h1>
+    <div className="TextInput-infoBox">
       <input 
         type="text"
         value={name}
         onChange={handleNameChange}
         placeholder="Pin Name..."
       />
-
       {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
       <p>You typed: {name}</p>
     </div>
 
 
+    {/* TITLE AND TEXT BOX FOR DESCRIPTION INPUT*/}
     <h1 className="Upload-infoTitle">Description:</h1>
     <div className="TextInput-infoBox">
-    {/* Input element with value and onChange event */}
-    <input className="TextInput-bigBox"
-    type="text"
-    value={description}
-    onChange={handleDescriptionChange}
-    placeholder="Tell us about your pin!"
-    />
-
-    {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
-    <p>You typed: {description}</p>
+        <input className="TextInput-bigBox"
+        type="text"
+        value={description}
+        onChange={handleDescriptionChange}
+        placeholder="Tell us about your pin!"
+        />
+        {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
+        <p>You typed: {description}</p>
     </div>
 
 
-
+    {/* TITLE AND TEXT BOX FOR LOCATION INPUT*/}
     <h1 className="Upload-infoTitle">Location:</h1>
     <div className="TextInput-infoBox">
-    {/* Input element with value and onChange event */}
-    <input 
-    type="text"
-    value={location}
-    onChange={handleLocationChange}
-    placeholder="Where were you?"
-    />
-
-    {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
-    <p>You typed: {location}</p>
+        <input 
+        type="text"
+        value={location}
+        onChange={handleLocationChange}
+        placeholder="Where were you?"
+        />
+        {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
+        <p>You typed: {location}</p>
     </div>
 
-    
-
-
+    {/* TITLE AND TEXT BOX FOR DATE INPUT*/}
     <h1 className="Upload-infoTitle">Date:</h1>
     <div className="TextInput-infoBox">
-    {/* Input element with value and onChange event */}
-    <input 
-    type="text"
-    value={date}
-    onChange={handleDateChange}
-    placeholder="Date..."
-    />
-
-    {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
-    <p>You typed: {date}</p>
+        <input 
+        type="text"
+        value={date}
+        onChange={handleDateChange}
+        placeholder="Date..."
+        />
+        {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
+        <p>You typed: {date}</p>
     </div>
 
     
 
+    {/*submit button*/}
     <div>
     <button
         type="submit"
         className="NewPostInput-button u-pointer"
         value="Submit"
         onClick={handleSubmit}
-      >
-        Submit
+      >Submit
       </button>
-
-
     </div>
+
   </>
-    
-
-
   );
 };
 
