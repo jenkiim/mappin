@@ -9,3 +9,7 @@
 .TextInput-blueBox {
     border: 1px solid lightblue;
 }
+
+.TextInput-sub{
+    margin-left: 6%;
+}

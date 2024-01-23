@@ -119,14 +119,14 @@ const TextInput = () => {
     <div>
         <button
             type="submit"
-            className="NewPostInput-button u-pointer"
+            className="NewPostInput-button u-pointer TextInput-sub"
             value="Submit"
             onClick={handleSubmit}
         >Submit
         </button>
         <button
             type="submit"
-            className="NewPostInput-button u-pointer"
+            className="NewPostInput-button u-pointer "
             value="Submit"
             onClick={handleCancel}
         >
