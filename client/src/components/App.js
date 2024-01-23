@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound.js";
 import Map from "./pages/Map.js";
 import NavBar from "./modules/NavBar.js";
 import Upload from "./pages/Upload.js";
+//import Login from "./pages/login.js";
 
 import "../utilities.css";
 
@@ -18,7 +19,7 @@ import { get, post } from "../utilities";
  * Define the "App" component
  */
 const App = () => {
-  const [userId, setUserId] = useState(undefined);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -40,7 +41,7 @@ const App = () => {
   };
 
   const handleLogout = () => {
-    setUserId(undefined);
+    setUserId(null);
     post("/api/logout");
   };
 

@@ -12,6 +12,7 @@ const login = ({ userId, handleLogin, handleLogout }) => {
   return (
     <div className>
       <img src={logo} alt="MapPin Logo" className="login-logo" />
+      <h1>TEST</h1>
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         {userId ? (
           <button
