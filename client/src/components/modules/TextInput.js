@@ -6,6 +6,7 @@ const TextInput = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
+  const [date, setDate] = useState('');
 
 
   // Event handler for changes in input
@@ -18,6 +19,9 @@ const TextInput = () => {
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
   };
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,17 +29,19 @@ const TextInput = () => {
         name: name,
         description: description,
         location: location,
+        date: date,
     }
     props.onSubmit && props.onSubmit(newEntry);
     setName("");
     setDescription("");
     setLocation("");
+    setDate("");
   };
 
 
 
   return (<>
-  <h1 className="Upload-infoTitle">Pin Name:</h1>
+  <h1 className="Upload-infoTitle">Name:</h1>
   <div className="TextInput-infoBox">
       {/* Input element with value and onChange event */}
       <input 
@@ -50,7 +56,7 @@ const TextInput = () => {
     </div>
 
 
-    <h1 className="Upload-infoTitle">Pin Description:</h1>
+    <h1 className="Upload-infoTitle">Description:</h1>
     <div className="TextInput-infoBox">
     {/* Input element with value and onChange event */}
     <input className="TextInput-bigBox"
@@ -66,7 +72,7 @@ const TextInput = () => {
 
 
 
-    <h1 className="Upload-infoTitle">Pin Location:</h1>
+    <h1 className="Upload-infoTitle">Location:</h1>
     <div className="TextInput-infoBox">
     {/* Input element with value and onChange event */}
     <input 
@@ -78,8 +84,28 @@ const TextInput = () => {
 
     {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
     <p>You typed: {location}</p>
+    </div>
+
+    
 
 
+    <h1 className="Upload-infoTitle">Date:</h1>
+    <div className="TextInput-infoBox">
+    {/* Input element with value and onChange event */}
+    <input 
+    type="text"
+    value={date}
+    onChange={handleDateChange}
+    placeholder="Date..."
+    />
+
+    {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
+    <p>You typed: {date}</p>
+    </div>
+
+    
+
+    <div>
     <button
         type="submit"
         className="NewPostInput-button u-pointer"
