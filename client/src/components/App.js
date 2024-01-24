@@ -58,7 +58,7 @@ const App = () => {
       <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
         <Route path="/" element={<Map pins={pins} addNewPin={addNewPin} setPins={setPins} />} />
-        <Route path="/upload" element={<Upload pins={pins} addNewPin={addNewPin} />} />
+        <Route path="/upload" element={<Upload pins={pins} addNewPin={addNewPin} userId={userId}/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

@@ -5,7 +5,7 @@ import "./Upload.css";
 const Upload = (props) => {
   return (
     <div>
-      <TextInput addNewPin={props.addNewPin} />
+      <TextInput addNewPin={props.addNewPin} userId={props.userId} />
     </div>
   );
 };
