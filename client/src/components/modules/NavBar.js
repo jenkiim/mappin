@@ -19,6 +19,14 @@ const NavBar = ({ props, userId, handleLogin, handleLogout }) => {
     setEntries([entryObj].concat(entries));
   };
 
+  const buttonStyle = {
+    color: "#6fa8dc",
+    padding: "18px 15px",
+    cursor: "pointer",
+    background: "none",
+    border: "1px solid",
+  };
+
   return (
     <nav className="NavBar-container">
       {/* <NewEntry addNewEntry={addNewEntry} className="col" /> */}
@@ -30,6 +38,7 @@ const NavBar = ({ props, userId, handleLogin, handleLogout }) => {
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
           {userId ? (
             <button
+              style={buttonStyle}
               onClick={() => {
                 googleLogout();
                 handleLogout();
