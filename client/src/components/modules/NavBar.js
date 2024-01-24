@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 //import { Link } from "@reach/router";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
-import { NewEntry } from "./NewEntryInput.js";
+import UploadButton from "./UploadButton.js";
 
 import "./NavBar.css";
 import logo from "./logo.png";
@@ -21,7 +21,8 @@ const NavBar = ({ props, userId, handleLogin, handleLogout }) => {
 
   return (
     <nav className="NavBar-container">
-      <NewEntry addNewEntry={addNewEntry} className="col" />
+      {/* <NewEntry addNewEntry={addNewEntry} className="col" /> */}
+      <UploadButton />
       <div className="NavBar-title u-inlineBlock">
         <img src={logo} className="NavBar-smallPic" />
       </div>
