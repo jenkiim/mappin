@@ -47,10 +47,8 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 router.get("/pins", (req, res) => {
   // empty selector means get all pins
-  Pin.find({}).then((pins) => res.send(pins.map((a) => a.content)));
-  // TODO: filter by userid
-  // const filteredPins = data.pins.filter((pin) => comment.creator_id == req.query.creator_id);
-  // res.send(filteredPins)
+  Pin.find({creator_id: req.user._id}).then((pins) => res.send(pins.map((a) => a.content)));
+  
 });
 
 router.post("/pin", auth.ensureLoggedIn, (req, res) => {
