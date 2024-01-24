@@ -20,6 +20,7 @@ import { get, post } from "../utilities";
  */
 const App = () => {
   const [userId, setUserId] = useState(null);
+  const [pins, setPins] = useState([]);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -45,13 +46,19 @@ const App = () => {
     post("/api/logout");
   };
 
+  // this gets called when the user uploads new pin, so their
+  // pin gets added to the map right away
+  const addNewPin = (pinObj) => {
+    console.log("new pin added in app.js");
+    setPins([pinObj].concat(pins));
+  };
+
   return (
     <div>
       <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
-        <Route path="/" element={<Map />} />
-        <Route path="/upload" element={<Upload />} />
-        {/* <Route path="/upload" element={<Map />} /> */}
+        <Route path="/" element={<Map pins={pins} addNewPin={addNewPin} setPins={setPins} />} />
+        <Route path="/upload" element={<Upload pins={pins} addNewPin={addNewPin} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

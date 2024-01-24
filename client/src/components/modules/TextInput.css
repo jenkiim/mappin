@@ -1,15 +1,15 @@
 .TextInput-infoBox {
-    margin-left: 6%;
+  margin-left: 6%;
 }
 
 .TextInput-bigBox {
-    height: 100px;
-    width: 40%;
+  height: 100px;
+  width: 40%;
 }
 .TextInput-blueBox {
-    border: 1px solid lightblue;
+  border: 1px solid lightblue;
 }
 
-.TextInput-sub{
-    margin-left: 6%;
+.TextInput-sub {
+  margin-left: 6%;
 }

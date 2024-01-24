@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 //define a message schema for the database
 const PinSchema = new mongoose.Schema({
-  name:String,
-  description:String,
-  location:String
+  creator_id: String,
+  creator_name: String,
+  content: Object, //this is the GeoJSON pin
 });
 
 // compile model from schema

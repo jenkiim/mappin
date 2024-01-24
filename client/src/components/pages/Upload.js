@@ -1,11 +1,11 @@
 import React from "react";
-import TextInput from '../modules/TextInput';
+import TextInput from "../modules/TextInput";
 import "./Upload.css";
 
-const Upload = () => {
+const Upload = (props) => {
   return (
     <div>
-      <TextInput />
+      <TextInput addNewPin={props.addNewPin} />
     </div>
   );
 };
