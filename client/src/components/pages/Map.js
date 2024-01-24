@@ -31,8 +31,28 @@ const Map = (props) => {
     get("/api/pins").then((pinObjs) => {
       //TODO: add user id as a thing to pass in so we can filter pins by user logged in
       let reversedPinObjs = pinObjs.reverse();
+      console.log("pinobjs")
+      console.log(reversedPinObjs);
       props.setPins(reversedPinObjs);
+      console.log("actual pins");
+      console.log(props.pins);
+      const ab=([{creator_id:"65b02046cbed999f0ebb9b7c",
+      creatorname:"Tiana Jiang",content:{type:"Feature",
+      geometry:{type:"Point",coordinates:[0,0]},properties:{creator_id:"65b02046cbed999f0ebb9b7c",name:"2",description:"2",date:"2"}},__v:{$numberInt:"0"}},{creator_id:"65b02046cbed999f0ebb9b7c",
+      creatorname:"Tiana Jiang",content:{type:"Feature",
+      geometry:{type:"Point",coordinates:[0,10]},properties:{creator_id:"65b02046cbed999f0ebb9b7c",name:"2",description:"2",date:"2"}},__v:{$numberInt:"0"}}])
+
+
+
+      reversedPinObjs.map((feature) =>
+        new mapboxgl.Marker().setLngLat(feature.geometry.coordinates).addTo(map.current)
+      );
     });
+
+
+    
+
+    return () => map.remove();
   }, []);
 
   ///// TODO: Add GeoJSON feature to map
