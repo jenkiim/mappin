@@ -60,6 +60,7 @@ const TextInput = (props) => {
     setLatitude("");
     setLongitude("");
     setDate("");
+    navigate("/");
   };
 
   // Need to use the navigate function
