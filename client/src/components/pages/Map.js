@@ -48,11 +48,6 @@ const Map = (props) => {
         new mapboxgl.Marker().setLngLat(feature.geometry.coordinates).addTo(map.current)
       );
     });
-
-
-    
-
-    return () => map.remove();
   }, []);
 
   ///// TODO: Add GeoJSON feature to map
