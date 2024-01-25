@@ -47,7 +47,17 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 router.get("/pins", (req, res) => {
   // empty selector means get all pins
-  Pin.find({creator_id: req.user._id}).then((pins) => res.send(pins.map((a) => a.content)));
+  // if (req.user._id){
+  //   const id = req.user._id;
+  // }else{
+  //   const id = "";
+  // }
+  try{
+    Pin.find({creator_id: req.user._id}).then((pins) => res.send(pins.map((a) => a.content)));
+  }catch(error){
+
+  }
+  
   
 });
 
