@@ -116,3 +116,8 @@ form {
   margin: 12px;
   border-radius: 4px;
 }
+
+.x-button{
+  top: -10px;
+  right:-10px;
+}
