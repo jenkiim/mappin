@@ -1,0 +1,29 @@
+.viewPin-pinName{
+
+}
+
+.viewPin-pinDescription{
+
+}
+
+.margs{
+    margin-left: 4%;
+    margin-right:4%;
+}
+.photoMargs{
+    margin-left: 4%;
+    margin-top: 2%;
+}
+
+.viewPin-date{
+    color: grey;
+    font-size: 12px;
+}
+
+.viewPin-photoContainer{
+    width: 30%;
+}
+.viewPin-photo{
+    max-width: 100%;
+    height: auto;
+}
