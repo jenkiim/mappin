@@ -1,4 +1,21 @@
 .Upload-infoTitle {
-    margin-left: 6%;
-    color: rgb(99, 166, 247);
+  margin-left: 6%;
+  color: rgb(99, 166, 247);
+  width: 60%;
 }
+
+.Upload-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0% 2% 2% 2%;
+  /* align-content: stretch; */
+}
+
+.Upload-subcontainer {
+  flex-grow: 1; /* Allow flex item to grow */
+  flex-basis: 50%; /* Set initial size to 50% of the container width */
+}
+
+/* display: grid; Use CSS Grid */
+/* grid-template-columns: 1fr 1fr; Two columns with equal width */
+/* height: 100vh; Full height of the viewport */
