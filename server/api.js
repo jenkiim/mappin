@@ -9,9 +9,15 @@
 
 const express = require("express");
 
+// Import multer
+const multer = require("multer");
+// We'll use this later to specify how we want to upload files.
+const upload = multer();
+
 // import models so we can interact with the database
 const User = require("./models/user");
 const Pin = require("./models/pin");
+const DbFile = require("./models/DbFile");
 
 // import authentication library
 const auth = require("./auth");
@@ -22,7 +28,7 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 
-const data = {};
+// const data = {};
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -52,13 +58,9 @@ router.get("/pins", (req, res) => {
   // }else{
   //   const id = "";
   // }
-  try{
-    Pin.find({creator_id: req.user._id}).then((pins) => res.send(pins.map((a) => a.content)));
-  }catch(error){
-
-  }
-  
-  
+  try {
+    Pin.find({ creator_id: req.user._id }).then((pins) => res.send(pins.map((a) => a.content)));
+  } catch (error) {}
 });
 
 router.post("/pin", auth.ensureLoggedIn, (req, res) => {
@@ -75,6 +77,34 @@ router.get("/user", (req, res) => {
   User.findById(req.query.userid).then((user) => {
     res.send(user);
   });
+});
+
+// Here, we're saying that we have a route uploadFile.
+// uploadFile expects 1 file to be uploaded, and for the form field that file is uploaded to to be named file (that's what the upload.single("file") means).
+// Then, we declare our callback for how we'll handle the request like normal.
+router.post("/uploadFile", upload.single("file"), (req, res) => {
+  const image = new DbFile({ name: req.body.name, file: Buffer.from(req.file.buffer) });
+  image
+    .save()
+    .then((image) => {
+      res.status(200).send({});
+    })
+    .catch((err) => {
+      console.log(`Failed to save image to database: ${err}`);
+      res.status(500).send({ error: "failed to upload!" });
+    });
+});
+
+// This code has no error handling and should really check that o !== null.
+router.get("/file", (req, res) => {
+  DbFile.findOne({ name: req.query.name })
+    .then((o) => {
+      res.send({ file: o.file.toString("base64") });
+    })
+    .catch((error) => {
+      console.log(`Failed to search for file in MongoDB: ${error}`);
+      res.status(400).send({ error: "Failed to search for file in MongoDB" });
+    });
 });
 
 // anything else falls to this "not found" case

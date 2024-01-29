@@ -4,6 +4,8 @@ import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/goo
 import UploadButton from "./UploadButton.js";
 
 import "./NavBar.css";
+import "./Button.css";
+import "./UploadButton.js";
 import logo from "./logo.png";
 
 // This identifies your web application to Google's authentication service
@@ -31,14 +33,15 @@ const NavBar = ({ props, userId, handleLogin, handleLogout }) => {
     <nav className="NavBar-container">
       {/* <NewEntry addNewEntry={addNewEntry} className="col" /> */}
       <UploadButton />
-      <div className="NavBar-title u-inlineBlock">
+      <div className="NavBar-imageContainer">
+        {/* u-inlineBlock"> */}
         <img src={logo} className="NavBar-smallPic" />
       </div>
-      <div className="NavBar-linkContainer u-inlineBlock">
+      <div className="Button-container NavBar-linkContainer">
         <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
           {userId ? (
             <button
-              style={buttonStyle}
+              class="Button-button"
               onClick={() => {
                 googleLogout();
                 handleLogout();

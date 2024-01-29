@@ -7,7 +7,7 @@ import NotFound from "./pages/NotFound.js";
 import Map from "./pages/Map.js";
 import NavBar from "./modules/NavBar.js";
 import Upload from "./pages/Upload.js";
-//import Login from "./pages/login.js";
+import ImageUpload from "./modules/ImageUpload.js";
 
 import "../utilities.css";
 
@@ -54,11 +54,18 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="u-flexColumn">
       <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
-        <Route path="/" element={<Map pins={pins} addNewPin={addNewPin} setPins={setPins} userId={userId}/>} />
-        <Route path="/upload" element={<Upload pins={pins} addNewPin={addNewPin} userId={userId}/>} />
+        <Route
+          path="/"
+          element={<Map pins={pins} addNewPin={addNewPin} setPins={setPins} userId={userId} />}
+        />
+        <Route
+          path="/upload"
+          element={<Upload pins={pins} addNewPin={addNewPin} userId={userId} />}
+        />
+        <Route path="/imageUpload" element={<ImageUpload />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
