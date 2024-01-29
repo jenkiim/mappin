@@ -2,9 +2,13 @@
   margin-left: 6%;
 }
 
+.TextInput-longerBox {
+  width: 40%;
+}
+
 .TextInput-bigBox {
   height: 100px;
-  width: 40%;
+  width: 80%;
 }
 .TextInput-blueBox {
   border: 1px solid lightblue;
@@ -12,4 +16,13 @@
 
 .TextInput-sub {
   margin-left: 6%;
+}
+
+.TextInput-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.TextInput-space {
+  row-gap: 10px;
 }

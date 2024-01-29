@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./UploadButton.css";
+import "./Button.css";
 
 /**
  * New Post is a parent component for all input components
@@ -23,11 +24,11 @@ const UploadButton = () => {
 
   // idk why but the picture won't be the button :( (also gave up and added button to nav bar...)
   return (
-    <div className="u-flex-justifyLeft">
+    <div className="Button-container UploadButton-margin">
       <button
         type="submit"
         src="plus_button.png"
-        className="NewPostInput-button u-pointer"
+        className="Button-button u-pointer"
         value="Submit"
         onClick={handleClick}
       >

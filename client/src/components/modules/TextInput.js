@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { convertToGeoJSON } from "./ConvertGeoJSON.js";
 import { post } from "../../utilities";
 
+import ImageUpload from "./ImageUpload.js";
+
 /**
  * New Post is a parent component for all input components
  *
@@ -76,104 +78,114 @@ const TextInput = (props) => {
     setLatitude("");
     setDate("");
   };
-  if (props.userId){
-
+  if (props.userId) {
     return (
-      <>
-        {/* TITLE AND TEXT BOX FOR NAME INPUT*/}
-        <h1 className="Upload-infoTitle">Name:</h1>
-        <div className="TextInput-infoBox">
-          <input type="text" value={name} onChange={handleNameChange} placeholder="Pin Name..." />
-          {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
-          <p>You typed: {name}</p>
+      <div className="Upload-container">
+        <div className="TextInput-container Upload-subcontainer">
+          {/* TITLE AND TEXT BOX FOR NAME INPUT*/}
+          <h1 className="Upload-infoTitle">Name:</h1>
+          <div className="TextInput-infoBox">
+            <input type="text" value={name} onChange={handleNameChange} placeholder="Pin Name..." />
+            {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
+            {/* <p>You typed: {name}</p> */}
+          </div>
+
+          {/* TITLE AND TEXT BOX FOR DESCRIPTION INPUT*/}
+          <h1 className="Upload-infoTitle">Description:</h1>
+          <div className="TextInput-infoBox">
+            <input
+              className="TextInput-bigBox"
+              type="text"
+              value={description}
+              onChange={handleDescriptionChange}
+              placeholder="Tell us about your pin!"
+            />
+            {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
+            {/* <p>You typed: {description}</p> */}
+          </div>
+
+          {/* TITLE AND TEXT BOX FOR LOCATION INPUT*/}
+          <div className="TextInput-container TextInput-space">
+            <h1 className="Upload-infoTitle">Location:</h1>
+            {/* Latitude */}
+            <div className="TextInput-infoBox">
+              <input
+                className="TextInput-longerBox"
+                type="text"
+                value={latitude}
+                onChange={handleLatitudeChange}
+                placeholder="Where were you? (latitutde)"
+              />
+              {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
+              {/* <p>You typed: {latitude}</p> */}
+            </div>
+
+            {/* Longitude */}
+            <div className="TextInput-infoBox">
+              <input
+                className="TextInput-longerBox"
+                type="text"
+                value={longitude}
+                onChange={handleLongitudeChange}
+                placeholder="Where were you? (longitude)"
+              />
+              {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
+              {/* <p>You typed: {longitude}</p> */}
+            </div>
+          </div>
+
+          <div className="TextInput-container TextInput-space">
+            {/* TITLE AND TEXT BOX FOR DATE INPUT*/}
+            <h1 className="Upload-infoTitle">Date:</h1>
+            <div className="TextInput-infoBox">
+              <input type="text" value={date} onChange={handleDateChange} placeholder="Date..." />
+              {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
+              {/* <p>You typed: {date}</p> */}
+            </div>
+
+            {/*submit button*/}
+            <div>
+              <button
+                type="submit"
+                className="NewPostInput-button u-pointer TextInput-sub"
+                value="Submit"
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+              <button
+                type="submit"
+                className="NewPostInput-button u-pointer "
+                value="Submit"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* TITLE AND TEXT BOX FOR DESCRIPTION INPUT*/}
-        <h1 className="Upload-infoTitle">Description:</h1>
-        <div className="TextInput-infoBox">
-          <input
-            className="TextInput-bigBox"
-            type="text"
-            value={description}
-            onChange={handleDescriptionChange}
-            placeholder="Tell us about your pin!"
-          />
-          {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
-          <p>You typed: {description}</p>
+        <div className="Upload-subcontainer">
+          <ImageUpload />
         </div>
-
-        {/* TITLE AND TEXT BOX FOR LOCATION INPUT*/}
-        <h1 className="Upload-infoTitle">Location:</h1>
-        {/* Latitude */}
-        <div className="TextInput-infoBox">
-          <input
-            type="text"
-            value={latitude}
-            onChange={handleLatitudeChange}
-            placeholder="Where were you? (latitutde)"
-          />
-          {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
-          <p>You typed: {latitude}</p>
-        </div>
-
-        {/* Longitude */}
-        <div className="TextInput-infoBox">
-          <input
-            type="text"
-            value={longitude}
-            onChange={handleLongitudeChange}
-            placeholder="Where were you? (longitude)"
-          />
-          {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
-          <p>You typed: {longitude}</p>
-        </div>
-
-        {/* TITLE AND TEXT BOX FOR DATE INPUT*/}
-        <h1 className="Upload-infoTitle">Date:</h1>
-        <div className="TextInput-infoBox">
-          <input type="text" value={date} onChange={handleDateChange} placeholder="Date..." />
-          {/* Displaying the current input value, NOT CONNECTED TO DB YET*/}
-          <p>You typed: {date}</p>
-        </div>
-
-        {/*submit button*/}
-        <div>
-          <button
-            type="submit"
-            className="NewPostInput-button u-pointer TextInput-sub"
-            value="Submit"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
-          <button
-            type="submit"
-            className="NewPostInput-button u-pointer "
-            value="Submit"
-            onClick={handleCancel}
-          >
-            Cancel
-          </button>
-        </div>
-      </>
+      </div>
     );
   }
 
-  return (<>
-    <h3>Please log in to create a new pin.</h3>
-    <button
-      type="submit"
-      className="NewPostInput-button u-pointer "
-      value="Submit"
-      onClick={handleCancel}
-    >
-      Home
-    </button>
-  </>)
+  return (
+    <>
+      <h3>Please log in to create a new pin.</h3>
+      <button
+        type="submit"
+        className="NewPostInput-button u-pointer "
+        value="Submit"
+        onClick={handleCancel}
+      >
+        Home
+      </button>
+    </>
+  );
 };
-
-
-
 
 export default TextInput;
 // export { AddPin };
