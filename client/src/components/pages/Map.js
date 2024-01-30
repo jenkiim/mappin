@@ -31,6 +31,11 @@ const Map = (props) => {
   // Need to use the navigate function
   const navigate = useNavigate();
 
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
   // load all existing pins to map
   useEffect(() => {
     document.title = "Map";
@@ -59,6 +64,20 @@ const Map = (props) => {
           console.log(marker);
           props.setClickedPin(marker);
           navigate("/viewPin");
+        });
+
+        //create popup if hovering over a pin
+        el.addEventListener("mouseover", ()=>{
+          var coordinates = marker.geometry.coordinates;
+          popup.setLngLat(coordinates)
+            .setHTML(marker.properties.name)
+            .addTo(map.current);
+        });
+
+        //remove popup when no longer hovering over pin
+        el.addEventListener("mouseleave", ()=>{
+          var coordinates = marker.geometry.coordinates;
+          popup.remove();
         });
       });
     });
