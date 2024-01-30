@@ -34,20 +34,20 @@ const Map = (props) => {
   // load all existing pins to map
   useEffect(() => {
     document.title = "Map";
-    console.log("helloeheloo");
+    // console.log("helloeheloo");
     get("/api/pins").then((pinObjs) => {
       let reversedPinObjs = pinObjs.reverse();
       props.setPins(reversedPinObjs);
-      reversedPinObjs.map((marker) =>{
-        const el = document.createElement('div');
-        el.className = 'marker';
+      reversedPinObjs.map((marker) => {
+        const el = document.createElement("div");
+        el.className = "marker";
         console.log("first");
         new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map.current);
         console.log("added marker at:");
         console.log(marker.geometry.coordinates);
         console.log(el);
         //Add click event to each marker
-        el.addEventListener('click', () => {
+        el.addEventListener("click", () => {
           // Create a popup on marker click
           console.log("clicked");
           // const popup = new mapboxgl.Popup({ offset: [0, -15] })
@@ -59,12 +59,10 @@ const Map = (props) => {
           console.log(marker);
           props.setClickedPin(marker);
           navigate("/viewPin");
-    });
-      }
-      );
+        });
+      });
     });
   }, []);
-
 
   // This is for having button as a component and trying to have on top of map
   // const addNewEntry = (entryObj) => {

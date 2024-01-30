@@ -3,17 +3,21 @@ import FileBase64 from "react-file-base64";
 
 import { get } from "../../utilities";
 
+import TextInput from "./TextInput.js";
+
+import "../pages/Upload.css";
 import "./ImageUpload.css";
 
-const ImageUpload = () => {
+const ImageUpload = (props) => {
   const [file, setFile] = useState(undefined);
   const [url, setUrl] = useState(undefined);
 
-  useEffect(() => {
-    get("/api/file", { name: "anImage" }).then(({ file }) => {
-      setUrl(file);
-    });
-  }, []);
+  // have to change, this uploads whatever image named "anImage" shows up on website when we want the pic the user has currently uploaded
+  // useEffect(() => {
+  //   get("/api/picture", { name: "anImage" }).then(({ file }) => {
+  //     setUrl(file);
+  //   });
+  // }, []);
 
   const handleUpload = (event) => {
     event.preventDefault();
@@ -42,18 +46,30 @@ const ImageUpload = () => {
   // If the URL exists, make an image using the URL as a data URL for the image.
   // Also add a button for uploading the image.
   return (
-    <div className="ImageUpload-buttons ImageUpload-container">
-      <div>
-        {" "}
-        <FileBase64 type="file" multiple={false} onDone={({ base64 }) => setFile(base64)} />
-        <button onClick={handleUpload}>Upload Profile Picture</button>
+    <div className="Upload-container">
+      <div className="Upload-subcontainer">
+        <TextInput
+          addNewPin={props.addNewPin}
+          userId={props.userId}
+          file={file}
+          setFile={setFile}
+        />
       </div>
-      <div className="ImageUpload-imageContainer">
-        {url ? (
-          <img src={`${atob(url)}`} className="ImageUpload-uploadedPic" />
-        ) : (
-          "No image uploaded!"
-        )}
+      <div className="Upload-subcontainer">
+        <div className="ImageUpload-buttons ImageUpload-container">
+          <div>
+            {" "}
+            <FileBase64 type="file" multiple={false} onDone={({ base64 }) => setFile(base64)} />
+            {/* <button onClick={handleUpload}>Upload Profile Picture</button> */}
+          </div>
+          <div className="ImageUpload-imageContainer">
+            {url ? (
+              <img src={`${atob(url)}`} className="ImageUpload-uploadedPic" />
+            ) : (
+              "No image uploaded!"
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

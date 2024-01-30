@@ -52,12 +52,6 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 router.get("/pins", (req, res) => {
-  // empty selector means get all pins
-  // if (req.user._id){
-  //   const id = req.user._id;
-  // }else{
-  //   const id = "";
-  // }
   try {
     Pin.find({ creator_id: req.user._id }).then((pins) => res.send(pins.map((a) => a.content)));
   } catch (error) {}
@@ -82,8 +76,13 @@ router.get("/user", (req, res) => {
 // Here, we're saying that we have a route uploadFile.
 // uploadFile expects 1 file to be uploaded, and for the form field that file is uploaded to to be named file (that's what the upload.single("file") means).
 // Then, we declare our callback for how we'll handle the request like normal.
-router.post("/uploadFile", upload.single("file"), (req, res) => {
-  const image = new DbFile({ name: req.body.name, file: Buffer.from(req.file.buffer) });
+router.post("/uploadPicture", upload.single("file"), (req, res) => {
+  const image = new DbFile({
+    creator_id: req.user._id,
+    creator_name: req.user.name,
+    file: Buffer.from(req.file.buffer),
+  });
+  console.log("image", image);
   image
     .save()
     .then((image) => {
@@ -96,14 +95,19 @@ router.post("/uploadFile", upload.single("file"), (req, res) => {
 });
 
 // This code has no error handling and should really check that o !== null.
-router.get("/file", (req, res) => {
-  DbFile.findOne({ name: req.query.name })
+router.get("/picture", (req, res) => {
+  DbFile.findOne({
+    creator_id: req.user._id,
+    name: req.query.name,
+    latitude: req.query.latitude,
+    longitude: req.query.latitude,
+  })
     .then((o) => {
       res.send({ file: o.file.toString("base64") });
     })
     .catch((error) => {
-      console.log(`Failed to search for file in MongoDB: ${error}`);
-      res.status(400).send({ error: "Failed to search for file in MongoDB" });
+      console.log(`Failed to search for picture in MongoDB: ${error}`);
+      res.status(400).send({ error: "Failed to search for picture in MongoDB" });
     });
 });
 
