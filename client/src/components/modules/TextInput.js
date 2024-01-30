@@ -163,7 +163,7 @@ const TextInput = (props) => {
                   type="text"
                   value={latitude}
                   onChange={handleLatitudeChange}
-                  placeholder="Where were you? (latitutde)"
+                  placeholder="Location latitude (N is positive, S is negative)"
                 />
               </div>
 
@@ -174,7 +174,7 @@ const TextInput = (props) => {
                   type="text"
                   value={longitude}
                   onChange={handleLongitudeChange}
-                  placeholder="Where were you? (longitude)"
+                  placeholder="Location longitude (E is positive, W is negative)"
                 />
               </div>
             </div>
