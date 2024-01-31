@@ -26,3 +26,28 @@
 .TextInput-space {
   row-gap: 10px;
 }
+
+.TextInput-buttons {
+  margin-top: 5%;
+}
+
+.TextInput-imageUploadContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  height: 400px;
+  width: auto;
+}
+
+.TextInput-imageContainer {
+  display: flex;
+  height: 100%;
+  width: auto;
+}
+
+.TextInput-uploadedPic {
+  display: flex;
+  height: 100%;
+  width: auto;
+  max-height: 100%;
+}
