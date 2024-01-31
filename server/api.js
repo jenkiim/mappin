@@ -80,9 +80,11 @@ router.post("/uploadPicture", upload.single("file"), (req, res) => {
   const image = new DbFile({
     creator_id: req.user._id,
     creator_name: req.user.name,
+    name: req.body.name,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude,
     file: Buffer.from(req.file.buffer),
   });
-  console.log("image", image);
   image
     .save()
     .then((image) => {

@@ -81,7 +81,6 @@ const TextInput = (props) => {
     formData.append("name", name);
     formData.append("latitude", latitude);
     formData.append("longitude", longitude); // Send that formData object to the uploadFile endpoint. It'll be encoded as multipart/form-data since we're sending a FormData as the body.
-    console.log("formdata", formData);
     fetch("/api/uploadPicture", {
       method: "POST",
       body: formData,
