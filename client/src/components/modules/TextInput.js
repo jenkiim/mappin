@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import FileBase64 from "react-file-base64";
 
 import "./TextInput.css";
-import "./ImageUpload.css";
 import { useNavigate } from "react-router-dom";
-import { convertToGeoJSON } from "./ConvertGeoJSON.js";
-import { post } from "../../utilities";
-
-// import ImageUpload from "./ImageUpload.js";
 
 /**
  * New Post is a parent component for all input components
@@ -25,7 +20,7 @@ const TextInput = (props) => {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [date, setDate] = useState("");
-  const [file, setFile] = useState(undefined);
+  const [file, setFile] = useState("");
 
   // Event handler for changes in input
   const handleNameChange = (event) => {
@@ -55,51 +50,17 @@ const TextInput = (props) => {
       date: date,
     };
     newPin = convertToGeoJSON(newPin);
-    post("/api/pin", newPin).then((pin) => {
-      // display this pin on the screen
-      props.addNewPin(newPin);
-    });
-
-    // image upload
-    if (file === undefined) {
-      console.log("here");
-      console.warn("Uploading file with no file set...");
-      // setName("");
-      // setDescription("");
-      // setLatitude("");
-      // setLongitude("");
-      // setDate("");
-      navigate("/");
-      return;
-    } // Now we know that we actually have a file to work with.
-
-    console.log("name", name);
-
     const formData = new FormData();
     const imageBlob = new Blob([file], { type: "text/plain" }); // Build up a FormData object with a field for our file and a name.
     formData.append("file", imageBlob);
-    formData.append("name", name);
-    formData.append("latitude", latitude);
-    formData.append("longitude", longitude); // Send that formData object to the uploadFile endpoint. It'll be encoded as multipart/form-data since we're sending a FormData as the body.
-    fetch("/api/uploadPicture", {
+    formData.append("pin", JSON.stringify(newPin));
+    console.log("formdata", formData);
+    fetch("/api/pin", {
       method: "POST",
       body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error uploading profile picture:", error);
-      });
-    // post("/api/uploadPicture", formData)
-    //   // .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("Uploaded picture:", data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error uploading picture:", error);
-    //   });
+    }).then((pin) => {
+      props.addNewPin(newPin);
+    });
 
     // reset everything
     setName("");
@@ -109,6 +70,13 @@ const TextInput = (props) => {
     setDate("");
     setFile("");
     navigate("/");
+
+    // image upload
+    if (file === undefined) {
+      console.log("here");
+      navigate("/");
+      return;
+    }
   };
 
   // Need to use the navigate function
@@ -208,13 +176,13 @@ const TextInput = (props) => {
           </div>
         </div>
         <div className="Upload-subcontainer">
-          <div className="ImageUpload-buttons ImageUpload-container">
+          <div className="TextInput-buttons TextInput-imageUploadContainer">
             <div>
               {" "}
               <FileBase64 type="file" multiple={false} onDone={({ base64 }) => setFile(base64)} />
             </div>
-            <div className="ImageUpload-imageContainer">
-              {file ? <img src={file} className="ImageUpload-uploadedPic" /> : "No image uploaded!"}
+            <div className="TextInput-imageContainer">
+              {file ? <img src={file} className="TextInput-uploadedPic" /> : "No image uploaded!"}
             </div>
           </div>
         </div>
@@ -237,5 +205,25 @@ const TextInput = (props) => {
   );
 };
 
+function convertToGeoJSON(input) {
+  const { latitude, longitude, ...properties } = input;
+  const object = {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [longitude, latitude],
+    },
+    properties: properties,
+  };
+  return object;
+}
+
+// function convertPicture(file) {
+//   const formData = new FormData();
+//   const imageBlob = new Blob([file], { type: "text/plain" }); // Build up a FormData object with a field for our file and a name.
+//   formData.append("file", imageBlob);
+//   return formData;
+// }
+
 export default TextInput;
-// export { AddPin };
+export { convertToGeoJSON };

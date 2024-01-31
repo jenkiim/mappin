@@ -7,7 +7,6 @@ import NotFound from "./pages/NotFound.js";
 import Map from "./pages/Map.js";
 import NavBar from "./modules/NavBar.js";
 import Upload from "./pages/Upload.js";
-import ImageUpload from "./modules/ImageUpload.js";
 import ViewPin from "./pages/viewPin.js";
 
 import "../utilities.css";
@@ -61,17 +60,22 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<Map pins={pins} addNewPin={addNewPin} setPins={setPins} userId={userId} clickedPin={clickedPin} setClickedPin={setClickedPin}/>}
+          element={
+            <Map
+              pins={pins}
+              addNewPin={addNewPin}
+              setPins={setPins}
+              userId={userId}
+              clickedPin={clickedPin}
+              setClickedPin={setClickedPin}
+            />
+          }
         />
         <Route
           path="/upload"
           element={<Upload pins={pins} addNewPin={addNewPin} userId={userId} />}
         />
-        <Route path="/imageUpload" element={<ImageUpload />} />
-        <Route
-          path="/viewPin"
-          element={<ViewPin clickedPin={clickedPin} userId={userId} />}
-        />
+        <Route path="/viewPin" element={<ViewPin clickedPin={clickedPin} userId={userId} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

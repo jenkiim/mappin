@@ -53,18 +53,31 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 router.get("/pins", (req, res) => {
   try {
-    Pin.find({ creator_id: req.user._id }).then((pins) => res.send(pins.map((a) => a.content)));
+    Pin.find({ creator_id: req.user._id }).then((pins) =>
+      res.send(
+        pins.map((a) => ({
+          content: a.content,
+          file: a.file ? a.file.toString("base64") : undefined,
+        }))
+      )
+    );
   } catch (error) {}
 });
 
-router.post("/pin", auth.ensureLoggedIn, (req, res) => {
+router.post("/pin", auth.ensureLoggedIn, upload.single("file"), (req, res) => {
   const newPin = new Pin({
     creator_id: req.user._id,
     creator_name: req.user.name,
-    content: req.body, //this is the GeoJSON pin
+    content: JSON.parse(req.body.pin), //this is the GeoJSON pin
+    file: Buffer.from(req.file.buffer),
   });
-
-  newPin.save().then((pin) => res.send(pin));
+  newPin
+    .save()
+    .then((pin) => res.send(pin))
+    .catch((err) => {
+      console.log(`Failed to save image to database: ${err}`);
+      res.status(500).send({ error: "failed to upload!" });
+    });
 });
 
 router.get("/user", (req, res) => {
@@ -73,31 +86,39 @@ router.get("/user", (req, res) => {
   });
 });
 
-// Here, we're saying that we have a route uploadFile.
-// uploadFile expects 1 file to be uploaded, and for the form field that file is uploaded to to be named file (that's what the upload.single("file") means).
-// Then, we declare our callback for how we'll handle the request like normal.
-router.post("/uploadPicture", upload.single("file"), (req, res) => {
-  const image = new DbFile({
-    creator_id: req.user._id,
-    creator_name: req.user.name,
-    name: req.body.name,
-    latitude: req.body.latitude,
-    longitude: req.body.longitude,
-    file: Buffer.from(req.file.buffer),
-  });
-  image
-    .save()
-    .then((image) => {
-      res.status(200).send({});
-    })
-    .catch((err) => {
-      console.log(`Failed to save image to database: ${err}`);
-      res.status(500).send({ error: "failed to upload!" });
-    });
-});
+// // Here, we're saying that we have a route uploadFile.
+// // uploadFile expects 1 file to be uploaded, and for the form field that file is uploaded to to be named file (that's what the upload.single("file") means).
+// // Then, we declare our callback for how we'll handle the request like normal.
+// router.post("/uploadPicture", upload.single("file"), (req, res) => {
+//   console.log("midddd", req.file);
+//   const image = new DbFile({
+//     creator_id: req.user._id,
+//     creator_name: req.user.name,
+//     name: req.body.name,
+//     latitude: req.body.latitude,
+//     longitude: req.body.longitude,
+//     file: Buffer.from(req.file.buffer),
+//   });
+//   image
+//     .save()
+//     .then((image) => {
+//       res.status(200).send({});
+//     })
+//     .catch((err) => {
+//       console.log(`Failed to save image to database: ${err}`);
+//       res.status(500).send({ error: "failed to upload!" });
+//     });
+// });
 
 // This code has no error handling and should really check that o !== null.
 router.get("/picture", (req, res) => {
+  Pin.findOne({ creator_id: req.user._id, content: req.query.content })
+    .then((pin) => res.send({ file: pin.file.toString("base64") }))
+    .catch((error) => {
+      console.log(`Failed to search for picture in MongoDB: ${error}`);
+      res.status(400).send({ error: "Failed to search for picture in MongoDB" });
+    });
+  // } catch (error) {}
   DbFile.findOne({
     creator_id: req.user._id,
     name: req.query.name,

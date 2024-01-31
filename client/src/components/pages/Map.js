@@ -18,7 +18,6 @@ const Map = (props) => {
   const [zoom, setZoom] = useState(9);
 
   useEffect(() => {
-    console.log("yo");
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
@@ -33,24 +32,30 @@ const Map = (props) => {
 
   var popup = new mapboxgl.Popup({
     closeButton: false,
-    closeOnClick: false
+    closeOnClick: false,
   });
 
   // load all existing pins to map
   useEffect(() => {
     document.title = "Map";
-    // console.log("helloeheloo");
     get("/api/pins").then((pinObjs) => {
+      // const contents = pinObjs.map((pin) => pin.content);
+      // const files = pinObjs.map((pin) => pin.file);
+      pinObjs = pinObjs.map((pin) => {
+        let newPin = pin.content;
+        newPin.properties.file = pin.file;
+        return newPin;
+      });
+      console.log("Pinnnnn", pinObjs);
       let reversedPinObjs = pinObjs.reverse();
-      props.setPins(reversedPinObjs);
+      props.setPins(reversedPinObjs.content);
       reversedPinObjs.map((marker) => {
         const el = document.createElement("div");
         el.className = "marker";
-        console.log("first");
         new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).addTo(map.current);
         console.log("added marker at:");
         console.log(marker.geometry.coordinates);
-        console.log(el);
+        // console.log(el);
         //Add click event to each marker
         el.addEventListener("click", () => {
           // Create a popup on marker click
@@ -67,15 +72,13 @@ const Map = (props) => {
         });
 
         //create popup if hovering over a pin
-        el.addEventListener("mouseover", ()=>{
+        el.addEventListener("mouseover", () => {
           var coordinates = marker.geometry.coordinates;
-          popup.setLngLat(coordinates)
-            .setHTML(marker.properties.name)
-            .addTo(map.current);
+          popup.setLngLat(coordinates).setHTML(marker.properties.name).addTo(map.current);
         });
 
         //remove popup when no longer hovering over pin
-        el.addEventListener("mouseleave", ()=>{
+        el.addEventListener("mouseleave", () => {
           var coordinates = marker.geometry.coordinates;
           popup.remove();
         });
