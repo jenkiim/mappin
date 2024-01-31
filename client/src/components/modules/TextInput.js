@@ -46,6 +46,13 @@ const TextInput = (props) => {
 
   //handle submissions
   const handleSubmit = (event) => {
+    if (isNaN(latitude)) {
+      setLatitude("Enter a number");
+      return;
+    } else if (isNaN(longitude)) {
+      setLongitude("Enter a number");
+      return;
+    }
     event.preventDefault();
     let newPin = {
       name: name,
